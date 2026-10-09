@@ -10,6 +10,8 @@ interface Props {
   title?: string;
   description?: string;
   noindex?: boolean;
+  /** False for pages with no stable URL of their own, such as the 404 page. */
+  canonical?: boolean;
   ogImage?: string;
   ogImageAlt?: string;
 }
@@ -18,6 +20,7 @@ const {
   title,
   description = SITE.description,
   noindex = false,
+  canonical: hasCanonical = true,
   ogImage = '/og.png',
   ogImageAlt = 'Render Loop Labs logo',
 } = Astro.props;
@@ -34,7 +37,7 @@ const ogImageUrl = new URL(ogImage, SITE.url).href;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {hasCanonical && <link rel="canonical" href={canonical} />}
     {noindex && <meta name="robots" content="noindex" />}
 
     <link rel="preload" href={dmSansLatin} as="font" type="font/woff2" crossorigin />
@@ -53,7 +56,7 @@ const ogImageUrl = new URL(ogImage, SITE.url).href;
     <meta property="og:locale" content={SITE.locale} />
     <meta property="og:title" content={title ?? SITE.name} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    {hasCanonical && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />

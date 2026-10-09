@@ -88,7 +88,7 @@ export const PRODUCT = {
 ```
 
 - Change `name` and rebuild. Every page, page title, the nav and the Markdown pages update.
-- Changing `slug` changes the URLs. Settle it before the support and privacy URLs are submitted to App Store Connect or Google Play, as changing it later breaks those links. Also update the list of required pages in `scripts/check-build.mjs`.
+- Changing `slug` changes the URLs. Settle it before the support and privacy URLs are submitted to App Store Connect or Google Play, as changing it later breaks those links.
 
 In Markdown files, write `{{APP_NAME}}` rather than the name itself. Available tokens: `{{APP_NAME}}`, `{{APP_PATH}}`, `{{SUPPORT_EMAIL}}`, `{{HELLO_EMAIL}}`, `{{SUPPORT_RESPONSE}}`, `{{COMPANY_NAME}}`, `{{COMPANY_NUMBER}}` and `{{REGISTERED_OFFICE}}`. They work in text, link URLs and the frontmatter `title` and `description`. A misspelt token stops the build with an error.
 

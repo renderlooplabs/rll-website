@@ -29,6 +29,12 @@ jobs:
         with:
           node-version: 24
 
+      # Fails on missing pages, broken links, unreplaced tokens, em dashes,
+      # third-party resources or app pages built while the flag is off.
+      # A failure here stops the deploy job below from running.
+      - name: Check built site
+        run: npm run check
+
   deploy:
     needs: build
     runs-on: ubuntu-latest

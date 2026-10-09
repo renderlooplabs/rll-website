@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import { PRODUCT, productPath } from '../config/site';
 ---
 
-<Base title="Page not found" noindex>
+<Base title="Page not found" noindex canonical={false}>
   <section class="container section">
     <p class="eyebrow">404</p>
     <h1>We can't find that page.</h1>
