@@ -2,6 +2,8 @@
 
 Version 1.0, October 2026. Master files are the SVGs; everything else is exported from them.
 
+> **In this repository:** only the files the website uses are kept here: the five files in `favicon/`, and `svg/rll-horizontal-colour.svg`, `svg/rll-horizontal-colour-dark.svg` and `svg/rll-stacked-colour-dark.svg`. The full kit (every lock-up and colourway, PNGs, PDFs and avatars) is kept outside the repo. The guidelines below still apply in full.
+
 ## What is in this folder
 
 | Folder | Contents |

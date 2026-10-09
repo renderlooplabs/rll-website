@@ -31,7 +31,7 @@ npm run brand
 ## Project structure
 
 ```
-brand/                         the logo kit: master SVGs, PNGs, PDFs, favicons, avatars (see brand/README.md)
+brand/                         brand guidelines plus the logo files the site uses (see brand/README.md)
 public/                        copied as-is: CNAME, robots.txt, favicons, logos, og.png, manifest
 scripts/sync-brand.mjs         copies site assets out of brand/ and builds og.png
 scripts/check-build.mjs        post-build checks
@@ -111,7 +111,7 @@ Writing style for the whole site: British English, plain and calm, and no em das
 
 ## Brand, colours and dark mode
 
-The logo kit lives in `brand/`, with its own guidelines in [`brand/README.md`](brand/README.md). The site follows them:
+`brand/` holds the logo kit's guidelines ([`brand/README.md`](brand/README.md)) and only the kit files the site uses: the five favicon files and three SVG lock-ups. The full kit (PNGs, PDFs, avatars and other lock-ups) is kept outside the repo. The site follows the guidelines:
 
 - **Logo:** the horizontal lock-up (`rll-horizontal`) in the header and footer, as the kit recommends for websites. The `-colour` version is used in light mode and `-colour-dark` in dark mode, switched by the browser with a `<picture>` element. Clear space of at least 2X is kept around it.
 - **Favicons and app icons:** the kit's own files, used unchanged. `favicon.svg` switches colours in dark mode by itself.
@@ -121,7 +121,7 @@ The logo kit lives in `brand/`, with its own guidelines in [`brand/README.md`](b
 
 Light and dark themes follow the visitor's system setting (`prefers-color-scheme`). There is no manual toggle, which keeps the site free of JavaScript and of anything stored on the visitor's device. All colours are tokens at the top of `src/styles/global.css`, once for light and once for dark, with their WCAG contrast ratios noted. Keep body text at 4.5:1 or better in both themes.
 
-When the logo kit changes, replace the files in `brand/` (keeping the same file names), then run:
+When the logo kit changes, copy the new versions of those eight files into `brand/` (same names and folders), then run:
 
 ```sh
 npm run brand
