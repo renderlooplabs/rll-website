@@ -1,0 +1,33 @@
+---
+// Horizontal lock-up from the logo kit (brand/svg). The browser picks the
+// dark colourway when the visitor's system is in dark mode.
+// Files are copied into public/brand/ by `npm run brand`.
+
+interface Props {
+  class?: string;
+  /** Rendered height in px. The kit's minimum for the horizontal logo is 16px. */
+  height?: number;
+}
+
+const { class: className, height = 22 } = Astro.props;
+
+// viewBox of rll-horizontal-*.svg is 8711 x 1080.
+const width = Math.round((height * 8711) / 1080);
+---
+
+<picture class:list={['logo', className]}>
+  <source srcset="/brand/rll-horizontal-colour-dark.svg" media="(prefers-color-scheme: dark)" />
+  <img src="/brand/rll-horizontal-colour.svg" alt="Render Loop Labs" width={width} height={height} />
+</picture>
+
+<style>
+  .logo,
+  .logo img {
+    display: block;
+  }
+
+  .logo img {
+    max-width: 100%;
+    height: auto;
+  }
+</style>

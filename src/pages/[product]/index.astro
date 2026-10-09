@@ -1,0 +1,167 @@
+---
+import Base from '../../layouts/Base.astro';
+import { EMAIL, PRODUCT, productPath } from '../../config/site';
+
+export function getStaticPaths() {
+  // Not built at all while the app is switched off (PRODUCT.enabled in site.ts).
+  if (!PRODUCT.enabled) return [];
+  return [{ params: { product: PRODUCT.slug } }];
+}
+
+const description = `${PRODUCT.name} is a simple app for people living with IBD to keep a record of symptoms and food. Coming soon from Render Loop Labs.`;
+
+const features = [
+  {
+    title: 'Note how you feel',
+    body: 'Record symptoms in a few taps, such as pain, urgency, bowel movements, tiredness and how your day is going overall.',
+  },
+  {
+    title: 'Keep a food log',
+    body: 'Add meals, snacks and drinks as you go, with as much or as little detail as you like.',
+  },
+  {
+    title: 'See it side by side',
+    body: 'Look back over days and weeks on a single timeline, with symptoms and food shown together.',
+  },
+  {
+    title: 'Bring it to appointments',
+    body: 'Create a clear summary of your entries to share with your care team, if and when you choose.',
+  },
+];
+
+const updatesLink = `mailto:${EMAIL.hello}?subject=${encodeURIComponent(`${PRODUCT.name} launch updates`)}`;
+---
+
+<Base title={PRODUCT.name} description={description} ogImageAlt={`${PRODUCT.name} by Render Loop Labs`}>
+  <section class="container section hero">
+    <p class="eyebrow">A Render Loop Labs app</p>
+    <div class="title-row">
+      <h1>{PRODUCT.name}</h1>
+      <span class="badge">{PRODUCT.status}</span>
+    </div>
+    <p class="lead">
+      A calm, simple way to keep track of symptoms and food when you live with inflammatory bowel
+      disease, including Crohn's disease and ulcerative colitis.
+    </p>
+  </section>
+
+  <section class="container section" aria-labelledby="what">
+    <h2 id="what">What it's for</h2>
+    <p class="intro muted">
+      Living with IBD often means remembering a lot: how you felt, what you ate and when things
+      changed. {PRODUCT.name} gives you one tidy place to write it down and look back on it.
+    </p>
+    <ul class="features" role="list">
+      {
+        features.map((f) => (
+          <li>
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="container section" aria-labelledby="not">
+    <div class="note">
+      <h2 id="not">A record, not a doctor</h2>
+      <p>
+        {PRODUCT.name} is a personal record-keeping tool. It does not diagnose, treat or give medical
+        advice, and it is not a replacement for your GP or IBD team. Please speak to a healthcare
+        professional about your symptoms or treatment.
+      </p>
+      <p>If you feel very unwell, contact NHS 111, or call 999 in an emergency.</p>
+    </div>
+  </section>
+
+  <section class="container section" aria-labelledby="updates">
+    <h2 id="updates">Hear when it launches</h2>
+    <p class="muted measure">
+      {PRODUCT.name} is in development. If you'd like a single email when it's available, write to
+      us at <a href={updatesLink}>{EMAIL.hello}</a> and we'll let you know.
+    </p>
+    <ul class="links" role="list">
+      <li><a class="arrow-link" href={productPath('support')}>Support</a></li>
+      <li><a class="arrow-link" href={productPath('privacy')}>Privacy</a></li>
+      <li><a class="arrow-link" href={productPath('terms')}>Terms of use</a></li>
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding-block: clamp(4rem, 2.5rem + 7vw, 8rem) var(--space-section);
+  }
+
+  .title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .title-row h1 {
+    margin: 0;
+  }
+
+  .intro {
+    max-width: var(--measure);
+    margin-bottom: 2.5rem;
+  }
+
+  .features {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 40rem) {
+    .features {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .features li {
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .features h3 {
+    margin-bottom: 0.4rem;
+    font-size: var(--step-0);
+    letter-spacing: -0.01em;
+  }
+
+  .features p {
+    margin: 0;
+    color: var(--ink-muted);
+  }
+
+  .note {
+    max-width: var(--measure);
+    padding-left: 1.25rem;
+    border-left: 3px solid var(--ink);
+  }
+
+  .note h2 {
+    font-size: var(--step-1);
+  }
+
+  .note p:last-child {
+    margin-bottom: 0;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+    margin: 2rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+</style>

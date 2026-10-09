@@ -1,0 +1,25 @@
+{
+  "name": "rll-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Website for Render Loop Labs Ltd, deployed to renderlooplabs.com",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "node scripts/check-build.mjs",
+    "brand": "node scripts/sync-brand.mjs"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "dependencies": {
+    "@astrojs/markdown-satteri": "^0.4.3",
+    "@fontsource-variable/dm-sans": "^5.3.0",
+    "astro": "^7.3.8"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
+  }
+}

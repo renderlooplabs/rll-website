@@ -1,0 +1,82 @@
+---
+// Wrapper for Markdown pages: the company privacy notice and the app's
+// support, privacy and terms pages.
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Small label above the heading, linking back to the section's main page. */
+  section: { label: string; href: string };
+  /** Browser and Open Graph title, if different from the heading. */
+  metaTitle?: string;
+  draft?: boolean;
+  updated?: Date;
+}
+
+const { title, description, section, metaTitle = title, draft = false, updated } = Astro.props;
+
+const updatedLabel = updated?.toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+---
+
+<Base title={metaTitle} description={description} noindex={draft}>
+  <article class="container section">
+    <p class="eyebrow"><a href={section.href}>{section.label}</a></p>
+    <h1>{title}</h1>
+    {updatedLabel && !draft && <p class="muted">Last updated {updatedLabel}</p>}
+    {
+      draft && (
+        <div class="draft" role="note">
+          <p class="draft-title">Draft, not yet in force</p>
+          <p>
+            This is a placeholder. The final version will replace it after legal review, and
+            nothing on this page applies until then.
+          </p>
+        </div>
+      )
+    }
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+</Base>
+
+<style>
+  .eyebrow a {
+    text-decoration: none;
+  }
+
+  .eyebrow a:hover {
+    text-decoration: underline;
+    text-decoration-color: currentColor;
+  }
+
+  h1 {
+    max-width: var(--measure);
+  }
+
+  .draft {
+    max-width: var(--measure);
+    margin: 1.5rem 0 2.5rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--ink);
+    border-radius: var(--radius-sm);
+    background: var(--card);
+  }
+
+  .draft p {
+    margin: 0;
+  }
+
+  .draft-title {
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.25rem !important;
+  }
+</style>

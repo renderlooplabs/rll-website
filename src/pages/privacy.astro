@@ -1,0 +1,22 @@
+---
+// Company privacy notice, from src/content/pages/privacy.md.
+// Always published, whatever the app's feature flag says.
+import { getEntry } from 'astro:content';
+import Prose from '../layouts/Prose.astro';
+import { SITE, fillHtmlTokens, fillTokens } from '../config/site';
+
+const page = await getEntry('pages', 'privacy');
+if (!page) throw new Error('src/content/pages/privacy.md is missing');
+
+const html = fillHtmlTokens(page.rendered?.html ?? '');
+---
+
+<Prose
+  title={fillTokens(page.data.title)}
+  description={fillTokens(page.data.description)}
+  draft={page.data.draft}
+  updated={page.data.updated}
+  section={{ label: SITE.name, href: '/' }}
+>
+  <Fragment set:html={html} />
+</Prose>

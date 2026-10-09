@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+import { EMAIL, PRODUCT, productPath } from '../config/site';
+---
+
+<Base>
+  <section class="container section hero">
+    <p class="eyebrow">Render Loop Labs</p>
+    <h1>We build and publish our own digital products, starting with mobile apps.</h1>
+    <p class="lead">
+      Small, carefully made tools that do one job well. Designed, built and supported in the UK.
+    </p>
+  </section>
+
+  {
+    PRODUCT.enabled && (
+      <section class="container section" aria-labelledby="building">
+        <h2 class="eyebrow" id="building">What we're building</h2>
+        <div class="card">
+          <div class="card-head">
+            <h3>{PRODUCT.name}</h3>
+            <span class="badge">{PRODUCT.status}</span>
+          </div>
+          <p>
+            An app for people living with inflammatory bowel disease (IBD) to keep a simple
+            record of symptoms and food, and look back over them in one place.
+          </p>
+          <a class="arrow-link" href={productPath()}>About {PRODUCT.name}</a>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="container section" aria-labelledby="contact">
+    <h2 class="eyebrow" id="contact">Contact</h2>
+    <p class="contact">
+      Questions, ideas or anything else: <a href={`mailto:${EMAIL.hello}`}>{EMAIL.hello}</a>
+    </p>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding-block: clamp(4rem, 2.5rem + 8vw, 9rem) var(--space-section);
+  }
+
+  .hero h1 {
+    max-width: 20ch;
+  }
+
+  .card {
+    max-width: 40rem;
+    padding: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--card);
+    transition: border-color 0.15s ease;
+  }
+
+  .card:hover {
+    border-color: var(--line-strong);
+  }
+
+  .card-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.875rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .card h3 {
+    margin: 0;
+    font-size: var(--step-2);
+  }
+
+  .card p {
+    color: var(--ink-muted);
+  }
+
+  .contact {
+    font-size: var(--step-1);
+    max-width: 40rem;
+  }
+</style>

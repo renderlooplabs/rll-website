@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import { PRODUCT, productPath } from '../config/site';
+---
+
+<Base title="Page not found" noindex canonical={false}>
+  <section class="container section">
+    <p class="eyebrow">404</p>
+    <h1>We can't find that page.</h1>
+    <p class="lead">It may have moved, or the link may be mistyped.</p>
+    <ul class="links" role="list">
+      <li><a class="arrow-link" href="/">Home</a></li>
+      {
+        PRODUCT.enabled && (
+          <>
+            <li><a class="arrow-link" href={productPath()}>{PRODUCT.name}</a></li>
+            <li><a class="arrow-link" href={productPath('support')}>Support</a></li>
+          </>
+        )
+      }
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+    margin: 2rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+</style>
