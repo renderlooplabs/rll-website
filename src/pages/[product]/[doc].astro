@@ -1,0 +1,33 @@
+---
+// Renders each Markdown file in src/content/product/ at /<product slug>/<file name>/
+import { getCollection } from 'astro:content';
+import Prose from '../../layouts/Prose.astro';
+import { PRODUCT, fillHtmlTokens, fillTokens, productPath } from '../../config/site';
+
+export async function getStaticPaths() {
+  // Not built at all while the app is switched off (PRODUCT.enabled in site.ts).
+  if (!PRODUCT.enabled) return [];
+  const docs = await getCollection('product');
+  return docs.map((doc) => ({
+    params: { product: PRODUCT.slug, doc: doc.id },
+    props: { doc },
+  }));
+}
+
+const { doc } = Astro.props;
+// {{TOKENS}} are filled in here rather than in a Markdown plugin, because
+// Astro caches rendered Markdown and would keep an old app name after a rename.
+const html = fillHtmlTokens(doc.rendered?.html ?? '');
+const title = fillTokens(doc.data.title);
+---
+
+<Prose
+  title={title}
+  metaTitle={`${title}: ${PRODUCT.name}`}
+  description={fillTokens(doc.data.description)}
+  section={{ label: PRODUCT.name, href: productPath() }}
+  draft={doc.data.draft}
+  updated={doc.data.updated}
+>
+  <Fragment set:html={html} />
+</Prose>

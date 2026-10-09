@@ -1,0 +1,86 @@
+---
+import Logo from './Logo.astro';
+import { EMAIL, PRODUCT, productPath } from '../config/site';
+
+const current = Astro.url.pathname;
+const inProduct = current.startsWith(productPath());
+---
+
+<header class="site-header">
+  <div class="container bar">
+    <a href="/" class="home" aria-current={current === '/' ? 'page' : undefined}>
+      <Logo />
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        {
+          PRODUCT.enabled && (
+            <li>
+              <a href={productPath()} aria-current={inProduct ? 'true' : undefined}>
+                {PRODUCT.name}
+              </a>
+            </li>
+          )
+        }
+        <li><a href={`mailto:${EMAIL.hello}`}>Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--line);
+    background: var(--bg);
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 4.25rem;
+  }
+
+  /* Clear space around the logo: at least 2X (twice the dot diameter), about 12px here. */
+  .home {
+    display: inline-flex;
+    padding-block: 0.75rem;
+    text-decoration: none;
+  }
+
+  ul {
+    display: flex;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  nav a {
+    display: inline-block;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--ink-muted);
+  }
+
+  nav a:hover {
+    color: var(--ink);
+    background: var(--surface);
+  }
+
+  nav a[aria-current] {
+    color: var(--ink);
+    box-shadow: inset 0 -2px 0 var(--ink);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  }
+
+  @media (max-width: 22rem) {
+    nav a {
+      padding-inline: 0.5rem;
+    }
+  }
+</style>
