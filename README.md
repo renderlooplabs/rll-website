@@ -8,7 +8,7 @@ The website for Render Loop Labs Ltd. A small static site built with [Astro](htt
 
 ## Local development
 
-You need Node.js 22.12 or later.
+You need Node.js 22.22 or later.
 
 ```sh
 npm ci

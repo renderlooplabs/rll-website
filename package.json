@@ -12,12 +12,12 @@
     "brand": "node scripts/sync-brand.mjs"
   },
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=22.22.0"
   },
   "dependencies": {
-    "@astrojs/markdown-satteri": "^0.4.3",
+    "@astrojs/markdown-satteri": "^0.4.5",
     "@fontsource-variable/dm-sans": "^5.3.0",
-    "astro": "^7.3.8"
+    "astro": "^7.4.1"
   },
   "devDependencies": {
     "sharp": "^0.35.5"
