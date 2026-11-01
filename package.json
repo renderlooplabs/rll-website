@@ -17,7 +17,7 @@
   "dependencies": {
     "@astrojs/markdown-satteri": "^0.4.5",
     "@fontsource-variable/dm-sans": "^5.3.0",
-    "astro": "^7.4.1"
+    "astro": "^7.4.4"
   },
   "devDependencies": {
     "sharp": "^0.35.5"
